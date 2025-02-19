@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resolve Support Ticket</title>
+</head>
+<body>
+    <h2>Resolve Support Ticket</h2>
+
+    <p><strong>Ticket ID:</strong> {{ ticket.id }}</p>
+    <p><strong>Service Request:</strong> {{ ticket.service_request }}</p>
+    <p><strong>Assigned At:</strong> {{ ticket.assigned_at }}</p>
+    <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+    {% if ticket.status != "Resolved" %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="resolution">Resolution Notes:</label><br>
+        <textarea id="resolution" name="resolution" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="submit">Mark as Resolved</button>
+    </form>
+{% else %}
+    <h3>Resolved Ticket Details</h3>
+    <p><strong>Resolution Notes:</strong> {{ ticket.resolution_notes }}</p>
+{% endif %}
+</body>
+</html>
